@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  orchestrator: 
+    build: .
+    volumes:
+      - .:/opt/bk-orchestrator
+      - $XDG_RUNTIME_DIR/podman/podman.sock:/var/run/docker.sock
+    environment:
+      BK_EXPORTER_URL: http://exporter-dummy
+    depends_on:
+      - exporter-dummy
+  exporter-dummy:
+    build: exporter-dummy
